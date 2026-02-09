@@ -6,6 +6,7 @@ import mimetypes
 import os
 import sys
 from dataclasses import dataclass
+from datetime import datetime
 from enum import IntEnum
 from pathlib import Path
 from typing import Any, Optional
@@ -295,6 +296,9 @@ def describe(
     prompt: str = typer.Option(
         DEFAULT_PROMPT, "--prompt", "-p", help="Prompt to use for describing the image"
     ),
+    out: Optional[Path] = typer.Option(
+        None, "--out", "-o", help="Save description to file (file path or directory)"
+    ),
 ) -> None:
     settings = get_settings(ctx)
 
@@ -384,15 +388,39 @@ def describe(
             exit_code=ExitCode.EXTERNAL_FAILURE,
         )
 
-    emit_success(
-        {
-            "description": description,
-            "image_path": str(image_path.resolve()),
-            "model": model,
-        },
-        settings,
-        text=description,
-    )
+    # Build response data
+    data = {
+        "description": description,
+        "image_path": str(image_path.resolve()),
+        "model": model,
+    }
+
+    # Handle output file saving
+    if out is not None:
+        try:
+            # Determine output file path
+            if out.is_dir() or (not out.exists() and str(out).endswith(os.sep)):
+                # out is a directory - generate filename
+                timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+                output_file = out / f"description-{timestamp}.txt"
+            else:
+                output_file = out
+
+            # Create parent directories if needed
+            output_file.parent.mkdir(parents=True, exist_ok=True)
+
+            # Write description to file
+            output_file.write_text(description, encoding="utf-8")
+            data["saved_to"] = str(output_file.resolve())
+        except (OSError, IOError) as exc:
+            emit_error(
+                f"Failed to save description to file: {exc}",
+                settings,
+                code="GENERAL_ERROR",
+                exit_code=ExitCode.GENERAL_ERROR,
+            )
+
+    emit_success(data, settings, text=description)
 
 
 if __name__ == "__main__":
