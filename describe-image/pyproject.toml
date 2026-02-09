@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "describe-image"
+version = "0.1.0"
+description = "CLI tool for image description via OpenRouter with Gemini Flash"
+requires-python = ">=3.10"
+dependencies = ["typer", "requests", "keyring"]
+
+[project.scripts]
+describe-image = "describe_image.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]

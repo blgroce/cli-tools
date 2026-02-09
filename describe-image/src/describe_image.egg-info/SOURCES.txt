@@ -1,0 +1,9 @@
+pyproject.toml
+src/describe_image/__init__.py
+src/describe_image/main.py
+src/describe_image.egg-info/PKG-INFO
+src/describe_image.egg-info/SOURCES.txt
+src/describe_image.egg-info/dependency_links.txt
+src/describe_image.egg-info/entry_points.txt
+src/describe_image.egg-info/requires.txt
+src/describe_image.egg-info/top_level.txt

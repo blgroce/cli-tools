@@ -1,0 +1,1 @@
+1770651293|STARTING Bash: git init && git add -A && git commit -m "$(cat <<'EOF'\nfeat: implement describe-image core CLI structure\n\nAdd main.py with:\n- Typer CLI framework with add_completion=False, no_args_is_help=True\n-
