@@ -1,0 +1,98 @@
+=== describe-image CLI End-to-End Test Results ===
+Date: $(date)
+
+=== Test 1: --help flag ===
+                                                                                
+ Usage: describe-image [OPTIONS] COMMAND [ARGS]...                              
+                                                                                
+ Describe images using AI models via OpenRouter API.                            
+                                                                                
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --format           TEXT  Output format: json or text [default: json]         │
+│ --quiet    -q            Suppress non-error output                           │
+│ --version                Show version and exit                               │
+│ --help                   Show this message and exit.                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────╮
+│ describe  Describe an image using AI via OpenRouter.                         │
+│ auth      Manage OpenRouter API key storage.                                 │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+=== Test 2: --version flag ===
+describe-image 0.1.0
+
+=== Test 3: auth --help ===
+                                                                                
+ Usage: describe-image auth [OPTIONS] COMMAND [ARGS]...                         
+                                                                                
+ Manage OpenRouter API key storage.                                             
+                                                                                
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --help          Show this message and exit.                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────────╮
+│ set     Store OpenRouter API key in system keyring.                          │
+│ status  Check if an API key is configured.                                   │
+│ clear   Remove API key from system keyring.                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+=== Test 4: auth status (JSON format) ===
+{"success": true, "data": {"env": false, "keyring": false, "source": null, "keyring_error": "No recommended backend was available. Install a recommended 3rd party backend package; or, install the keyrings.alt package if you want to use the non-recommended backends. See https://pypi.org/project/keyring for details."}}
+
+=== Test 5: auth status (text format) ===
+env: False; keyring: False; keyring_error: No recommended backend was available. Install a recommended 3rd party backend package; or, install the keyrings.alt package if you want to use the non-recommended backends. See https://pypi.org/project/keyring for details.
+
+=== Test 6: describe --help ===
+                                                                                
+ Usage: describe-image describe [OPTIONS] IMAGE_PATH                            
+                                                                                
+ Describe an image using AI via OpenRouter.                                     
+                                                                                
+╭─ Arguments ──────────────────────────────────────────────────────────────────╮
+│ *    image_path      PATH  Path to the image file to describe [required]     │
+╰──────────────────────────────────────────────────────────────────────────────╯
+╭─ Options ────────────────────────────────────────────────────────────────────╮
+│ --model   -m      TEXT  Model to use for description                         │
+│                         [default: google/gemini-2.5-flash-preview:thinking]  │
+│ --prompt  -p      TEXT  Prompt to use for describing the image               │
+│                         [default: Describe this image in detail.]            │
+│ --out     -o      PATH  Save description to file (file path or directory)    │
+│ --help                  Show this message and exit.                          │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+=== Test 7: describe without API key (error handling test) ===
+{"error": true, "code": "EXTERNAL_FAILURE", "message": "Keyring error: No recommended backend was available. Install a recommended 3rd party backend package; or, install the keyrings.alt package if you want to use the non-recommended backends. See https://pypi.org/project/keyring for details.. Set DESCRIBE_IMAGE_API_KEY instead."}
+Exit code: 4
+
+=== Test 8: describe with non-existent file (error handling) ===
+{"error": true, "code": "NOT_FOUND", "message": "Image file not found: /nonexistent/file.png"}
+Exit code: 3
+
+=== Test 9: describe with unsupported format (error handling) ===
+{"error": true, "code": "INVALID_ARGS", "message": "Unsupported image format. Supported: .png, .webp, .gif, .jpg, .jpeg"}
+Exit code: 2
+
+=== Test 10: invalid format option (error handling) ===
+{"error": true, "code": "INVALID_ARGS", "message": "Format must be json or text"}
+Exit code: 2
+
+=== All tests completed ===
+
+=== Unit Tests ===
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0 -- /home/blgroce/tools/cli-tools/describe-image/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/blgroce/tools/cli-tools/describe-image
+configfile: pyproject.toml
+plugins: mock-3.15.1
+collecting ... collected 4 items
+
+tests/test_output_saving.py::TestOutputSaving::test_out_option_saves_to_file PASSED [ 25%]
+tests/test_output_saving.py::TestOutputSaving::test_out_option_creates_parent_dirs PASSED [ 50%]
+tests/test_output_saving.py::TestOutputSaving::test_out_option_with_directory_generates_filename PASSED [ 75%]
+tests/test_output_saving.py::TestOutputSaving::test_without_out_option_no_saved_to PASSED [100%]
+
+============================== 4 passed in 0.07s ===============================
