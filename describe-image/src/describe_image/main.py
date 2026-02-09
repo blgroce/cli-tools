@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import base64
 import json
+import mimetypes
 import os
 import sys
 from dataclasses import dataclass
 from enum import IntEnum
+from pathlib import Path
 from typing import Any, Optional
 
 import keyring
+import requests
 import typer
 from keyring.errors import KeyringError, PasswordDeleteError
 
@@ -218,6 +222,176 @@ def auth_clear(ctx: typer.Context) -> None:
         {"cleared": True, "location": "keyring"},
         settings,
         text="Removed OpenRouter API key from system keyring.",
+    )
+
+
+SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+DEFAULT_PROMPT = "Describe this image in detail."
+
+
+def get_mime_type(image_path: Path) -> Optional[str]:
+    """Get MIME type from file extension."""
+    ext = image_path.suffix.lower()
+    if ext not in SUPPORTED_EXTENSIONS:
+        return None
+    mime_map = {
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".png": "image/png",
+        ".gif": "image/gif",
+        ".webp": "image/webp",
+    }
+    return mime_map.get(ext)
+
+
+def encode_image_to_base64(image_path: Path) -> str:
+    """Read and base64 encode an image file."""
+    with open(image_path, "rb") as f:
+        return base64.b64encode(f.read()).decode("utf-8")
+
+
+def send_to_openrouter(
+    api_key: str,
+    base64_image: str,
+    mime_type: str,
+    model: str,
+    prompt: str,
+) -> dict[str, Any]:
+    """Send image to OpenRouter API and get description."""
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+    }
+    data_url = f"data:{mime_type};base64,{base64_image}"
+    payload = {
+        "model": model,
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image_url",
+                        "image_url": {"url": data_url},
+                    },
+                    {
+                        "type": "text",
+                        "text": prompt,
+                    },
+                ],
+            }
+        ],
+    }
+    response = requests.post(OPENROUTER_URL, headers=headers, json=payload, timeout=120)
+    return response
+
+
+@app.command("describe", help="Describe an image using AI via OpenRouter.")
+def describe(
+    ctx: typer.Context,
+    image_path: Path = typer.Argument(..., help="Path to the image file to describe"),
+    model: str = typer.Option(
+        DEFAULT_MODEL, "--model", "-m", help="Model to use for description"
+    ),
+    prompt: str = typer.Option(
+        DEFAULT_PROMPT, "--prompt", "-p", help="Prompt to use for describing the image"
+    ),
+) -> None:
+    settings = get_settings(ctx)
+
+    # Validate image file exists
+    if not image_path.exists():
+        emit_error(
+            f"Image file not found: {image_path}",
+            settings,
+            code="NOT_FOUND",
+            exit_code=ExitCode.NOT_FOUND,
+        )
+
+    # Validate file is readable
+    if not image_path.is_file():
+        emit_error(
+            f"Path is not a file: {image_path}",
+            settings,
+            code="INVALID_ARGS",
+            exit_code=ExitCode.INVALID_ARGS,
+        )
+
+    # Get MIME type
+    mime_type = get_mime_type(image_path)
+    if not mime_type:
+        emit_error(
+            f"Unsupported image format. Supported: {', '.join(SUPPORTED_EXTENSIONS)}",
+            settings,
+            code="INVALID_ARGS",
+            exit_code=ExitCode.INVALID_ARGS,
+        )
+
+    # Get API key
+    api_key = resolve_api_key(settings)
+
+    # Encode image
+    try:
+        base64_image = encode_image_to_base64(image_path)
+    except (OSError, IOError) as exc:
+        emit_error(
+            f"Failed to read image file: {exc}",
+            settings,
+            code="GENERAL_ERROR",
+            exit_code=ExitCode.GENERAL_ERROR,
+        )
+
+    # Send to OpenRouter
+    try:
+        response = send_to_openrouter(api_key, base64_image, mime_type, model, prompt)
+    except requests.exceptions.Timeout:
+        emit_error(
+            "Request to OpenRouter timed out",
+            settings,
+            code="EXTERNAL_FAILURE",
+            exit_code=ExitCode.EXTERNAL_FAILURE,
+        )
+    except requests.exceptions.RequestException as exc:
+        emit_error(
+            f"Request failed: {exc}",
+            settings,
+            code="EXTERNAL_FAILURE",
+            exit_code=ExitCode.EXTERNAL_FAILURE,
+        )
+
+    # Handle API errors
+    if response.status_code != 200:
+        try:
+            error_data = response.json()
+            error_msg = error_data.get("error", {}).get("message", response.text)
+        except (json.JSONDecodeError, KeyError):
+            error_msg = response.text
+        emit_error(
+            f"OpenRouter API error ({response.status_code}): {error_msg}",
+            settings,
+            code="EXTERNAL_FAILURE",
+            exit_code=ExitCode.EXTERNAL_FAILURE,
+        )
+
+    # Parse response
+    try:
+        result = response.json()
+        description = result["choices"][0]["message"]["content"]
+    except (json.JSONDecodeError, KeyError, IndexError) as exc:
+        emit_error(
+            f"Failed to parse OpenRouter response: {exc}",
+            settings,
+            code="EXTERNAL_FAILURE",
+            exit_code=ExitCode.EXTERNAL_FAILURE,
+        )
+
+    emit_success(
+        {
+            "description": description,
+            "image_path": str(image_path.resolve()),
+            "model": model,
+        },
+        settings,
+        text=description,
     )
 
 
