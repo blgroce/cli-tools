@@ -1,7 +1,7 @@
 """Dataclasses for CRM entities."""
 from __future__ import annotations
 
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, fields
 from typing import Optional
 
 import sqlite3
@@ -20,7 +20,8 @@ class Company:
 
     @classmethod
     def from_row(cls, row: sqlite3.Row) -> Company:
-        return cls(**{k: row[k] for k in row.keys()})
+        valid = {f.name for f in fields(cls)}
+        return cls(**{k: row[k] for k in row.keys() if k in valid})
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -41,7 +42,8 @@ class Contact:
 
     @classmethod
     def from_row(cls, row: sqlite3.Row) -> Contact:
-        return cls(**{k: row[k] for k in row.keys()})
+        valid = {f.name for f in fields(cls)}
+        return cls(**{k: row[k] for k in row.keys() if k in valid})
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -61,7 +63,8 @@ class Interaction:
 
     @classmethod
     def from_row(cls, row: sqlite3.Row) -> Interaction:
-        return cls(**{k: row[k] for k in row.keys()})
+        valid = {f.name for f in fields(cls)}
+        return cls(**{k: row[k] for k in row.keys() if k in valid})
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -81,7 +84,8 @@ class Deal:
 
     @classmethod
     def from_row(cls, row: sqlite3.Row) -> Deal:
-        return cls(**{k: row[k] for k in row.keys()})
+        valid = {f.name for f in fields(cls)}
+        return cls(**{k: row[k] for k in row.keys() if k in valid})
 
     def to_dict(self) -> dict:
         return asdict(self)

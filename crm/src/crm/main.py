@@ -69,8 +69,10 @@ def main(
 
 
 from .commands.company import app as company_app
+from .commands.contact import app as contact_app
 
 app.add_typer(company_app)
+app.add_typer(contact_app)
 
 if __name__ == "__main__":
     app()
