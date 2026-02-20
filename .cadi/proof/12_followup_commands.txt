@@ -1,0 +1,27 @@
+=== Test 1: Default (due + overdue) ===
+Exit code: 0
+Success: True
+Count: 2
+  id=1, overdue=1, summary=Overdue call
+  id=2, overdue=0, summary=Due today email
+
+=== Test 2: --week ===
+Count: 3
+
+=== Test 3: --all ===
+Count: 4
+
+=== Test 4: done ===
+Exit code: 0
+Result: {'success': True, 'data': {'id': 1, 'followup_cleared': True}}
+
+=== Test 5: After done, all count ===
+Count: 3
+
+=== Test 6: done on nonexistent ===
+Exit code: 3
+
+=== Test 7: text format ===
+Follow-ups (due/overdue) table rendered with color coding
+
+ALL TESTS PASSED
