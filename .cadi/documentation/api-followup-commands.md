@@ -1,6 +1,6 @@
 # Followup Commands
 
-> View and manage follow-up reminders attached to interactions
+> crm followups command group for listing and completing follow-ups on interactions
 
 ## Location
 
@@ -10,21 +10,19 @@
 
 ## How It Works
 
-- Default: lists interactions with followup_date <= today (due + overdue)
-- --week flag: shows follow-ups due within next 7 days
-- --all flag: shows all pending follow-ups (non-null followup_date)
+- Default list: shows interactions with followup_date <= today (due + overdue)
+- --week flag: shows followup_date <= today + 7 days
+- --all flag: shows all where followup_date IS NOT NULL
+- JSON output includes id, contact_name, company_name, type, summary, followup_date, followup_note, days_overdue
+- Text format renders Rich table with color coding (red=overdue, yellow=today, green=upcoming)
 - done subcommand: clears followup_date and followup_note by interaction ID
-- JSON output includes days_overdue calculation
-- Text output uses rich table with color coding (red=overdue, yellow=today, green=upcoming)
-- Returns NOT_FOUND (exit 3) for invalid interaction IDs
+- Returns NOT_FOUND (exit 3) if interaction ID doesn't exist
+- Uses invoke_without_command=True on callback so bare 'crm followups' triggers list
 
 ## Usage
 
 ```bash
-crm followups                  # due today + overdue
-crm followups --week           # next 7 days
-crm followups --all            # all pending
-crm followups done <id>        # mark follow-up complete
+crm followups              # due today + overdue\ncrm followups --week       # next 7 days\ncrm followups --all        # all pending\ncrm followups done <id>    # mark complete
 ```
 
 ## Related Docs
