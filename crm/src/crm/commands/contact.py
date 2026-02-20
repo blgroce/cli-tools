@@ -297,7 +297,9 @@ def rm(
 
         contact_id = row["id"]
 
-        # Delete related interactions first
+        # Clear contact reference on deals (contact_id is nullable)
+        conn.execute("UPDATE deals SET contact_id = NULL WHERE contact_id = ?", (contact_id,))
+        # Delete related interactions
         conn.execute("DELETE FROM interactions WHERE contact_id = ?", (contact_id,))
         conn.execute("DELETE FROM contacts WHERE id = ?", (contact_id,))
         conn.commit()

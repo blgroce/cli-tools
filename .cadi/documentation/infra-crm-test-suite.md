@@ -1,6 +1,6 @@
-# CRM Test Suite
+# CRM CLI Test Suite
 
-> Comprehensive pytest test suite covering all CRM CLI modules with 87 tests
+> Complete test coverage for all CRM CLI modules - 87 tests across 8 test files
 
 ## Location
 
@@ -10,20 +10,17 @@
 
 ## How It Works
 
-- conftest.py provides shared fixtures: tmp_db (patches get_connection for test isolation), runner (Typer CliRunner), seeded_db (pre-populated with sample data)
-- test_db.py: 9 tests covering schema init, columns, FK enforcement, uniqueness, idempotent init
-- test_company.py: 16 tests for add, list, show, edit, rm, duplicate errors, not_found, force delete
-- test_contact.py: 13 tests for add (with/without company), list (company/tag filters), show, edit, rm
-- test_log.py: 16 tests for all 4 interaction types, followup parsing (Nd/Nw/ISO), date override, auto company_id resolution
-- test_deal.py: 15 tests for add, list, show, move, rm, stage validation, stage/company filters
-- test_followup.py: 7 tests for default/week/all views, done command, empty state, days_overdue field
-- test_search.py: 6 tests for cross-entity search, per-entity results, no results
-- test_status.py: 5 tests for dashboard metrics, empty db, pipeline/overdue counts
+- Database isolation: Each test uses a temp SQLite database via tmp_db fixture that patches get_connection in all command modules
+- Seeded data: seeded_db fixture provides Acme Corp company, Alice Smith contact, a call interaction with followup, and an Acme Deal
+- JSON output parsing: All tests parse JSON from result.output (stderr is mixed into output by CliRunner default)
+- Error testing: Error responses also parsed from result.output since CliRunner mixes stderr
+- Exit code verification: Tests verify correct exit codes (0=success, 1=general error, 2=invalid args, 3=not found)
+- Test files: conftest.py (fixtures), test_db.py (9 tests), test_company.py (16 tests), test_contact.py (13 tests), test_log.py (16 tests), test_deal.py (14 tests), test_followup.py (7 tests), test_search.py (6 tests), test_status.py (5 tests)
 
 ## Usage
 
 ```bash
-cd crm && . .venv/bin/activate && python -m pytest tests/ -v
+python3 -m pytest crm/tests/ -v
 ```
 
 ## Related Docs
