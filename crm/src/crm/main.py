@@ -71,10 +71,12 @@ def main(
 from .commands.company import app as company_app
 from .commands.contact import app as contact_app
 from .commands.log import app as log_app
+from .commands.deal import app as deal_app
 
 app.add_typer(company_app)
 app.add_typer(contact_app)
 app.add_typer(log_app)
+app.add_typer(deal_app)
 
 if __name__ == "__main__":
     app()
