@@ -68,5 +68,9 @@ def main(
     init_db()
 
 
+from .commands.company import app as company_app
+
+app.add_typer(company_app)
+
 if __name__ == "__main__":
     app()
