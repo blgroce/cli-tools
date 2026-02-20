@@ -1,6 +1,6 @@
-# CRM CLI Test Suite
+# CRM Test Suite
 
-> Complete test coverage for all CRM CLI modules - 87 tests across 8 test files
+> Complete pytest test suite for CRM CLI - 87 tests across 8 modules
 
 ## Location
 
@@ -10,17 +10,20 @@
 
 ## How It Works
 
-- Database isolation: Each test uses a temp SQLite database via tmp_db fixture that patches get_connection in all command modules
-- Seeded data: seeded_db fixture provides Acme Corp company, Alice Smith contact, a call interaction with followup, and an Acme Deal
-- JSON output parsing: All tests parse JSON from result.output (stderr is mixed into output by CliRunner default)
-- Error testing: Error responses also parsed from result.output since CliRunner mixes stderr
-- Exit code verification: Tests verify correct exit codes (0=success, 1=general error, 2=invalid args, 3=not found)
-- Test files: conftest.py (fixtures), test_db.py (9 tests), test_company.py (16 tests), test_contact.py (13 tests), test_log.py (16 tests), test_deal.py (14 tests), test_followup.py (7 tests), test_search.py (6 tests), test_status.py (5 tests)
+- conftest.py: tmp_db, runner, seeded_db fixtures patching all command modules
+- test_db.py (9 tests): schema creation, column validation, FK enforcement, unique constraints
+- test_company.py (16 tests): CRUD, duplicate errors, force cascade delete, status filter
+- test_contact.py (13 tests): CRUD with/without company, tag/company filters, cascade delete
+- test_log.py (16 tests): all 4 interaction types, followup parsing (Nd/Nw/ISO), date override, auto company_id
+- test_deal.py (14 tests): CRUD, stage validation, stage/company filters, move command
+- test_followup.py (7 tests): default/week/all views, done command, days_overdue field
+- test_search.py (6 tests): cross-entity LIKE search, empty results
+- test_status.py (5 tests): dashboard data, pipeline counts, empty DB handling
 
 ## Usage
 
 ```bash
-python3 -m pytest crm/tests/ -v
+cd crm && python3 -m pytest tests/ -v
 ```
 
 ## Related Docs
