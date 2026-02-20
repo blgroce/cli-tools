@@ -1,29 +1,36 @@
 Contact Commands Verification - Task 9
 =======================================
-Date: 2026-02-20
+Date: 2026-02-20 (Iteration 4 - bug fix and re-verification)
 
-All contact commands (add, list, show, edit, rm) verified working.
-Contact app registered in main.py.
+Bug Found & Fixed:
+- Contact.from_row() crashed with TypeError when SQL JOINed with companies table
+- The company_name column from JOIN was passed to Contact.__init__() which doesn't accept it
+- Fixed ALL model from_row() methods in models.py to filter keys to valid dataclass fields
+- This prevents the same issue for Interaction and Deal models in future tasks
+
+All 5 contact subcommands verified: add, list, show, edit, rm
 
 === Add Contact (with company) ===
-$ crm contact add "Jane Doe" --company "Test Corp" --email "jane@test.com" --role "CEO" --phone "555-1234" --tags "vip,founder" --notes "Key contact"
-{"success": true, "data": {"id": 5, "name": "Jane Doe", "company_id": 3, "role": "CEO", ...}}
+$ crm contact add "Jane Test" --company "TestCorp" --email "jane@test.com" --role "CEO" --phone "555-1234" --tags "vip,founder"
+{"success": true, "data": {"id": 3, "name": "Jane Test", "company_id": 2, "role": "CEO", "company_name": "TestCorp"}}
 
 === Add Contact (without company - independent) ===
-$ crm contact add "John Smith" --email "john@example.com" --role "Consultant"
-{"success": true, "data": {"id": 6, "name": "John Smith", "company_id": null, ...}}
+$ crm contact add "Solo Person" --email "solo@test.com"
+{"success": true, "data": {"id": 4, "name": "Solo Person", "company_id": null, "company_name": null}}
 
-=== List, Filter by company, Filter by tag === All working correctly
+=== Add with nonexistent company (exit 3) ===
+$ crm contact add "Bad" --company "NoSuchCo"
+stderr: {"error": true, "code": "NOT_FOUND", "message": "Company 'NoSuchCo' not found"}
 
-=== Show Contact === Includes company_name and interactions_count
+=== List contacts (all, by company, by tag) === All working correctly
 
-=== Edit Contact === Selective field updates work
+=== Show contact === Includes company_name and interactions_count
 
-=== Error cases === Nonexistent company -> exit 3, Nonexistent contact -> exit 3
+=== Edit contact === Selective field updates work; no-fields gives exit 2
 
-=== Remove Contact === Deletes contact and related interactions
+=== Remove contact === Deletes contact and related interactions
 
-=== Text Format === Rich table with ID, Name, Company, Role, Email columns
+=== Text format === Rich table with ID, Name, Company, Role, Email columns
 
 All features verified:
 - [x] add with --company, --email, --phone, --role, --tags, --notes
@@ -33,8 +40,12 @@ All features verified:
 - [x] list with --tag filter
 - [x] show with company_name and interactions_count
 - [x] edit with selective field updates
+- [x] edit with no fields -> exit 2
 - [x] rm deletes contact and related interactions
 - [x] JSON output by default
 - [x] --format text with rich tables
-- [x] Proper error codes (NOT_FOUND -> exit 3)
+- [x] Proper error codes (NOT_FOUND -> exit 3, INVALID_INPUT -> exit 2)
 - [x] Contact app registered in main.py
+- [x] models.py from_row() bug fixed for all models
+
+RESULT: ALL COMMANDS PASS

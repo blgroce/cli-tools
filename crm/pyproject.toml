@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crm"
+version = "0.1.0"
+description = "CLI CRM for BCG Ventures — contacts, interactions, deals, and follow-ups"
+requires-python = ">=3.10"
+dependencies = [
+    "typer",
+    "rich",
+]
+
+[project.scripts]
+crm = "crm.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]

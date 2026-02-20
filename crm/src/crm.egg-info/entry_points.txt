@@ -1,0 +1,2 @@
+[console_scripts]
+crm = crm.main:app

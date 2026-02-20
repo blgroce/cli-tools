@@ -1,0 +1,16 @@
+pyproject.toml
+src/crm/__init__.py
+src/crm/__main__.py
+src/crm/db.py
+src/crm/main.py
+src/crm/models.py
+src/crm/output.py
+src/crm.egg-info/PKG-INFO
+src/crm.egg-info/SOURCES.txt
+src/crm.egg-info/dependency_links.txt
+src/crm.egg-info/entry_points.txt
+src/crm.egg-info/requires.txt
+src/crm.egg-info/top_level.txt
+src/crm/commands/__init__.py
+src/crm/commands/company.py
+src/crm/commands/contact.py

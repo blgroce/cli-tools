@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+# gog-html - Extract HTML body from a Gmail message
+# Usage: gog-html <messageId> [--account <email>] [gog flags...]
+#
+# Fetches the full message via gog and extracts the text/html part.
+# Outputs raw HTML to stdout. Pipe to a file or browser as needed.
+#
+# Examples:
+#   gog-html 18f1a2b3c4d5e6f7
+#   gog-html 18f1a2b3c4d5e6f7 --account brian@bcg-ventures.com
+#   gog-html 18f1a2b3c4d5e6f7 > signature.html
+
+set -euo pipefail
+
+if [ $# -lt 1 ] || [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    echo "Usage: gog-html <messageId> [--account <email>] [gog flags...]"
+    echo ""
+    echo "Extract the HTML body from a Gmail message."
+    echo "Outputs raw HTML to stdout."
+    echo ""
+    echo "Examples:"
+    echo "  gog-html 18f1a2b3c4d5e6f7"
+    echo "  gog-html 18f1a2b3c4d5e6f7 --account brian@bcg-ventures.com"
+    echo "  gog-html 18f1a2b3c4d5e6f7 > email.html"
+    exit 0
+fi
+
+MSG_ID="$1"
+shift
+
+# Fetch the full message as JSON, pass through any extra flags (--account, etc.)
+JSON=$(gog gmail get "$MSG_ID" --format=full --json "$@" 2>&1)
+
+if [ $? -ne 0 ]; then
+    echo "Error fetching message: $JSON" >&2
+    exit 1
+fi
+
+# Extract HTML body from the MIME parts
+# The Gmail API returns base64url-encoded body data in the payload parts
+HTML=$(echo "$JSON" | python3 -c "
+import sys, json, base64
+
+def find_html(part):
+    \"\"\"Recursively search MIME parts for text/html.\"\"\"
+    mime = part.get('mimeType', '')
+
+    # Direct match
+    if mime == 'text/html':
+        data = part.get('body', {}).get('data', '')
+        if data:
+            # Gmail uses base64url encoding (- instead of +, _ instead of /)
+            data = data.replace('-', '+').replace('_', '/')
+            # Add padding if needed
+            padding = 4 - len(data) % 4
+            if padding != 4:
+                data += '=' * padding
+            return base64.b64decode(data).decode('utf-8', errors='replace')
+
+    # Recurse into sub-parts
+    for sub in part.get('parts', []):
+        result = find_html(sub)
+        if result:
+            return result
+
+    return None
+
+msg = json.load(sys.stdin)
+# gog wraps the Gmail API response: {message: {payload: ...}}
+payload = msg.get('message', msg).get('payload', msg)
+
+html = find_html(payload)
+if html:
+    print(html)
+else:
+    print('No text/html part found in this message.', file=sys.stderr)
+    sys.exit(1)
+")
+
+echo "$HTML"

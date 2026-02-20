@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: memory-search
+Version: 0.1.0
+Summary: Semantic memory search for Sprocket assistant — indexes markdown, embeds with OpenRouter, hybrid vector+BM25 search
+Requires-Python: >=3.10
+Requires-Dist: typer
+Requires-Dist: requests
+Requires-Dist: sqlite-vec

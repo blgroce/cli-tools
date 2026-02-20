@@ -34,3 +34,19 @@
 [2026-02-04 20:46:43] RAW:
 {"session_id":"f8e9cffc-2246-4141-901c-c90a6cdf0026","transcript_path":"/home/blgroce/.claude/projects/-home-blgroce-tools-cli-tools/f8e9cffc-2246-4141-901c-c90a6cdf0026.jsonl","cwd":"/home/blgroce/tools/cli-tools","hook_event_name":"Notification","message":"Claude is waiting for your input","notification_type":"idle_prompt"}
 ---
+[2026-02-09 10:10:02] NOTIFY [unknown]: Claude is waiting for your input
+[2026-02-09 10:10:02] RAW:
+{"session_id":"c010d909-2314-4670-b84a-320609c5add4","transcript_path":"/home/blgroce/.claude/projects/-home-blgroce-tools-cli-tools/c010d909-2314-4670-b84a-320609c5add4.jsonl","cwd":"/home/blgroce/tools/cli-tools","hook_event_name":"Notification","message":"Claude is waiting for your input","notification_type":"idle_prompt"}
+---
+[2026-02-09 10:13:31] NOTIFY [unknown]: Claude is waiting for your input
+[2026-02-09 10:13:31] RAW:
+{"session_id":"c010d909-2314-4670-b84a-320609c5add4","transcript_path":"/home/blgroce/.claude/projects/-home-blgroce-tools-cli-tools/c010d909-2314-4670-b84a-320609c5add4.jsonl","cwd":"/home/blgroce/tools/cli-tools","hook_event_name":"Notification","message":"Claude is waiting for your input","notification_type":"idle_prompt"}
+---
+[2026-02-09 10:15:11] NOTIFY [unknown]: Claude is waiting for your input
+[2026-02-09 10:15:11] RAW:
+{"session_id":"c010d909-2314-4670-b84a-320609c5add4","transcript_path":"/home/blgroce/.claude/projects/-home-blgroce-tools-cli-tools/c010d909-2314-4670-b84a-320609c5add4.jsonl","cwd":"/home/blgroce/tools/cli-tools","hook_event_name":"Notification","message":"Claude is waiting for your input","notification_type":"idle_prompt"}
+---
+[2026-02-09 10:20:35] NOTIFY [unknown]: Claude is waiting for your input
+[2026-02-09 10:20:35] RAW:
+{"session_id":"c010d909-2314-4670-b84a-320609c5add4","transcript_path":"/home/blgroce/.claude/projects/-home-blgroce-tools-cli-tools/c010d909-2314-4670-b84a-320609c5add4.jsonl","cwd":"/home/blgroce/tools/cli-tools","hook_event_name":"Notification","message":"Claude is waiting for your input","notification_type":"idle_prompt"}
+---

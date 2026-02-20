@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ports"
+version = "0.1.0"
+description = "See what's running on your ports and kill it"
+requires-python = ">=3.10"
+dependencies = ["typer", "rich", "textual"]
+
+[project.scripts]
+ports = "ports.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]

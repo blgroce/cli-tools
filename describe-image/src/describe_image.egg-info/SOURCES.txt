@@ -7,3 +7,4 @@ src/describe_image.egg-info/dependency_links.txt
 src/describe_image.egg-info/entry_points.txt
 src/describe_image.egg-info/requires.txt
 src/describe_image.egg-info/top_level.txt
+tests/test_output_saving.py

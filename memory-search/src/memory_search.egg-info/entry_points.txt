@@ -1,0 +1,2 @@
+[console_scripts]
+memory-search = memory_search.main:app
