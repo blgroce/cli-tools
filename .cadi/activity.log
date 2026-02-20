@@ -510,3 +510,298 @@
 [2026-02-20 14:03:26] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
 [2026-02-20 14:03:26] Bash: python3 .claude/skills/project-context/scripts/task_update.py 9 --passes 1
 [2026-02-20 14:03:29] TodoWrite
+[2026-02-20 14:03:32] Bash: git add -A && git commit -m "$(cat <<'EOF' feat: verify contact commands and add documentation  Cont...
+[2026-02-20 14:03:34] TodoWrite
+[2026-02-20 14:03:34] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:03:35] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:03:35] TodoWrite
+[2026-02-20 14:03:35] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:03:36] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:03:36] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:03:37] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:03:37] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:03:38] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:03:38] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:03:39] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:03:39] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:03:39] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:03:40] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/__init__.py
+[2026-02-20 14:03:43] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:03:43] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:03:44] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/__init__.py
+[2026-02-20 14:03:45] TodoWrite
+[2026-02-20 14:03:48] STOPPED: status=natural_stop session=8605a608 mode=bypassPermissions
+[2026-02-20 14:03:59] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:04:00] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:04:02] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:04:03] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:04:06] TodoWrite
+[2026-02-20 14:04:09] Write: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:04:10] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:04:10] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:04:10] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:04:11] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:04:11] TodoWrite
+[2026-02-20 14:04:15] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:04:15] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:04:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:04:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:04:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:04:17] Glob: crm/src/crm/commands/*.py
+[2026-02-20 14:04:17] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/__init__.py
+[2026-02-20 14:04:17] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:04:19] TodoWrite
+[2026-02-20 14:04:22] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:04:22] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:04:22] TodoWrite
+[2026-02-20 14:04:22] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:04:22] Edit: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:04:23] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:04:26] TodoWrite
+[2026-02-20 14:04:33] TodoWrite
+[2026-02-20 14:04:42] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:04:48] TodoWrite
+[2026-02-20 14:04:53] Bash: ls /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py 2>&1 || echo "File does not exist"
+[2026-02-20 14:04:55] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:05:07] Edit: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:05:11] Grep: log
+[2026-02-20 14:05:14] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:05:19] TodoWrite
+[2026-02-20 14:06:13] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:06:23] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 10 \   --changes '["Created crm/src/c...
+[2026-02-20 14:06:30] TodoWrite
+[2026-02-20 14:06:32] Bash: python3 .claude/skills/project-context/scripts/task_update.py 10 --passes 1
+[2026-02-20 14:06:37] Bash: git add crm/src/crm/commands/log.py crm/src/crm/main.py .cadi/proof/10_log_commands.txt .cadi/docume...
+[2026-02-20 14:06:43] TodoWrite
+[2026-02-20 14:06:45] Bash: ls /home/blgroce/tools/cli-tools/.cadi/cadi-project.sqlite 2>&1 || echo "NOT FOUND" # Try from proje...
+[2026-02-20 14:06:51] STOPPED: status=natural_stop session=feb00b5b mode=bypassPermissions
+[2026-02-20 14:06:58] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:06:58] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:07:03] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:07:03] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:07:04] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:07:04] TodoWrite
+[2026-02-20 14:07:06] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:07:07] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:07:07] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:07:08] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:07:08] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:07:09] TodoWrite
+[2026-02-20 14:07:11] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:07:12] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:07:12] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:07:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:07:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:07:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:07:14] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:07:14] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:07:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:07:16] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 10 \   --changes '["Verified log.py i...
+[2026-02-20 14:07:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:07:19] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:07:19] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/__init__.py
+[2026-02-20 14:07:23] Bash: python3 .claude/skills/project-context/scripts/task_update.py 10 --passes 1
+[2026-02-20 14:07:24] TodoWrite
+[2026-02-20 14:07:27] Bash: git status
+[2026-02-20 14:07:32] Bash: git log --oneline -5
+[2026-02-20 14:07:39] Bash: git add .cadi/documentation/flow-interaction-logging.md .cadi/proof/10_log_commands.txt .cadi/cadi-p...
+[2026-02-20 14:07:43] TodoWrite
+[2026-02-20 14:07:49] Write: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:07:54] STOPPED: status=natural_stop session=ca5827f7 mode=bypassPermissions
+[2026-02-20 14:07:56] Edit: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:08:00] Bash: ls /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py 2>&1 || echo "FILE_NOT_FOUND"
+[2026-02-20 14:08:03] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:08:03] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:08:04] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:08:04] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:08:05] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:08:09] TodoWrite
+[2026-02-20 14:08:11] TodoWrite
+[2026-02-20 14:08:12] TodoWrite
+[2026-02-20 14:08:15] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:08:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:08:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:08:16] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:08:17] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:08:17] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:08:17] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:08:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:08:18] Edit: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:08:20] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:08:20] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:08:21] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:08:21] TodoWrite
+[2026-02-20 14:08:22] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:08:22] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:08:22] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:08:27] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:08:28] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:08:29] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:08:29] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:08:35] TodoWrite
+[2026-02-20 14:08:41] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:08:42] TodoWrite
+[2026-02-20 14:08:46] TodoWrite
+[2026-02-20 14:08:53] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:09:00] TodoWrite
+[2026-02-20 14:10:04] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:10:13] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 11 \   --changes '["Created crm/src/c...
+[2026-02-20 14:10:16] Bash: python3 .claude/skills/project-context/scripts/task_update.py 11 --passes 1
+[2026-02-20 14:10:21] Bash: git status
+[2026-02-20 14:10:29] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:10:29] Bash: git add crm/src/crm/commands/deal.py crm/src/crm/main.py .cadi/documentation/api-deal-commands.md .c...
+[2026-02-20 14:10:33] TodoWrite
+[2026-02-20 14:10:40] STOPPED: status=natural_stop session=67b10b5e mode=bypassPermissions
+[2026-02-20 14:10:46] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 11 \   --changes '["Implemented deal ...
+[2026-02-20 14:10:46] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:10:49] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:10:50] Bash: python3 .claude/skills/project-context/scripts/task_update.py 11 --passes 1
+[2026-02-20 14:10:52] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:10:53] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:10:54] TodoWrite
+[2026-02-20 14:10:56] Bash: git status
+[2026-02-20 14:10:57] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:10:57] Glob: crm/src/crm/commands/*.py
+[2026-02-20 14:10:58] TodoWrite
+[2026-02-20 14:10:58] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:10:58] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:10:59] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:10:59] Bash: git diff crm/src/crm/main.py
+[2026-02-20 14:11:00] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:11:01] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:11:01] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:11:02] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:11:02] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:11:03] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:11:05] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:11:06] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:11:06] Bash: git add crm/src/crm/commands/deal.py crm/.cadi/documentation/api-deal-commands.md .cadi/cadi-project...
+[2026-02-20 14:11:08] Grep: followup|follow-up|follow_up
+[2026-02-20 14:11:09] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:11:10] TodoWrite
+[2026-02-20 14:11:14] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:11:17] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/__init__.py
+
+=== Run 2 started at Fri Feb 20 14:11:17 CST 2026 ===
+[2026-02-20 14:11:19] STOPPED: status=natural_stop session=5a6aa2df mode=bypassPermissions
+[2026-02-20 14:11:23] TodoWrite
+[2026-02-20 14:11:26] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:11:30] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:11:31] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:11:35] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:11:35] TodoWrite
+[2026-02-20 14:11:35] Write: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:11:38] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:11:39] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:11:39] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:11:40] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:11:40] TodoWrite
+[2026-02-20 14:11:44] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:11:45] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:11:45] Edit: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:11:45] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:11:46] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:11:46] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:11:46] Glob: crm/src/crm/commands/*.py
+[2026-02-20 14:11:48] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:11:51] Grep: followup|follow-up
+[2026-02-20 14:11:51] Bash: ls /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py 2>&1 || echo "FILE_NOT_FOUND"
+[2026-02-20 14:11:53] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:11:55] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:11:55] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:11:56] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:11:56] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:12:02] TodoWrite
+[2026-02-20 14:12:03] TodoWrite
+[2026-02-20 14:12:10] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:12:11] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:12:16] TodoWrite
+[2026-02-20 14:12:19] TodoWrite
+[2026-02-20 14:12:23] Bash: ls /home/blgroce/tools/cli-tools/crm/src/crm/commands/
+[2026-02-20 14:12:27] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:12:38] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:13:22] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:13:34] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 12 \   --changes '["Created crm/src/c...
+[2026-02-20 14:13:36] Bash: python3 .claude/skills/project-context/scripts/task_update.py 12 --passes 1
+[2026-02-20 14:13:41] Bash: git add crm/src/crm/commands/followup.py crm/src/crm/main.py .cadi/proof/12_followup_commands.txt .c...
+[2026-02-20 14:13:46] TodoWrite
+[2026-02-20 14:13:52] STOPPED: status=natural_stop session=8468bf41 mode=bypassPermissions
+[2026-02-20 14:13:58] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:14:04] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:14:04] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:14:08] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 12 \   --changes '["Verified followup...
+[2026-02-20 14:14:10] TodoWrite
+[2026-02-20 14:14:12] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:14:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:14:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:14:14] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:14:14] Glob: crm/src/crm/commands/*.py
+[2026-02-20 14:14:17] TodoWrite
+[2026-02-20 14:14:17] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:14:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:14:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:14:19] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:14:23] Bash: python3 .claude/skills/project-context/scripts/task_update.py 12 --passes 1
+[2026-02-20 14:14:25] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 12 \   --changes '["Verified followup...
+[2026-02-20 14:14:25] Bash: git status
+[2026-02-20 14:14:26] Bash: cd /home/blgroce/tools/cli-tools && python3 .claude/skills/project-context/scripts/doc_create.py \  ...
+[2026-02-20 14:14:30] Bash: git add .cadi/documentation/api-followup-commands.md .cadi/proof/12_followup_commands.txt .cadi/cadi...
+[2026-02-20 14:14:33] Bash: python3 .claude/skills/project-context/scripts/task_update.py 12 --passes 1
+[2026-02-20 14:14:34] Bash: python3 .claude/skills/project-context/scripts/activity_add.py 12 \   --changes '["Verified existing...
+[2026-02-20 14:14:34] Write: /home/blgroce/tools/cli-tools/crm/src/crm/commands/search.py
+[2026-02-20 14:14:36] TodoWrite
+[2026-02-20 14:14:37] Bash: git status -u
+[2026-02-20 14:14:41] Bash: python3 .claude/skills/project-context/scripts/task_update.py 12 --passes 1
+[2026-02-20 14:14:42] Bash: ls -la /home/blgroce/tools/cli-tools/.cadi/documentation/ 2>&1
+[2026-02-20 14:14:45] Bash: git add crm/src/crm/commands/followup.py crm/src/crm/main.py .cadi/proof/12_followup_commands.txt .c...
+[2026-02-20 14:14:46] Bash: ls -la /home/blgroce/tools/cli-tools/crm/.cadi/documentation/ 2>&1
+[2026-02-20 14:14:47] Write: /home/blgroce/tools/cli-tools/crm/src/crm/commands/status.py
+[2026-02-20 14:14:47] STOPPED: status=natural_stop session=f1d9ac35 mode=bypassPermissions
+[2026-02-20 14:14:47] Bash: git diff --cached --stat
+[2026-02-20 14:14:51] Bash: git add \   .cadi/documentation/api-followup-commands.md \   .cadi/proof/12_followup_commands.txt \ ...
+[2026-02-20 14:14:52] Bash: git status
+[2026-02-20 14:14:55] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:14:56] Bash: git add .cadi/proof/12_followup_commands.txt .cadi/documentation/api-followup-commands.md && git dif...
+[2026-02-20 14:14:56] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:14:56] Bash: python3 .claude/skills/project-context/scripts/run_get.py 2
+[2026-02-20 14:14:58] Bash: git add .cadi/proof/12_followup_commands.txt .cadi/documentation/api-followup-commands.md crm/.cadi/...
+[2026-02-20 14:14:59] Bash: python3 .claude/skills/project-context/scripts/task_list.py --run-id 2 --pending
+[2026-02-20 14:14:59] Bash: git status .cadi/proof/ 2>&1 && ls -la .cadi/proof/ 2>&1
+[2026-02-20 14:15:01] TodoWrite
+[2026-02-20 14:15:03] Bash: cat .gitignore 2>&1 | head -30
+[2026-02-20 14:15:04] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:15:04] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:15:05] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:15:05] TodoWrite
+[2026-02-20 14:15:06] Bash: git commit -m "$(cat <<'EOF' feat: verify followup commands and add documentation  Co-Authored-By: C...
+[2026-02-20 14:15:12] TodoWrite
+[2026-02-20 14:15:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:15:13] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:15:14] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:15:14] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:15:14] Bash: git add -f .cadi/proof/12_followup_commands.txt .cadi/documentation/api-followup-commands.md crm/.ca...
+[2026-02-20 14:15:15] Bash: find /home/blgroce/tools/cli-tools/crm -type f -name "*.py" -o -name "*.md" | head -100
+[2026-02-20 14:15:17] Bash: git diff --cached --name-only 2>&1
+[2026-02-20 14:15:17] Bash: tree -a /home/blgroce/tools/cli-tools/crm -I '__pycache__|*.egg-info|build' 2>/dev/null || find /hom...
+[2026-02-20 14:15:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/search.py
+[2026-02-20 14:15:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/status.py
+[2026-02-20 14:15:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:15:18] Read: /home/blgroce/tools/cli-tools/crm/src/crm/db.py
+[2026-02-20 14:15:19] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:15:19] Read: /home/blgroce/tools/cli-tools/crm/src/crm/models.py
+[2026-02-20 14:15:19] Read: /home/blgroce/tools/cli-tools/crm/src/crm/output.py
+[2026-02-20 14:15:19] Read: /home/blgroce/tools/cli-tools/crm/SPEC.md
+[2026-02-20 14:15:20] Bash: git log --oneline -5 2>&1
+[2026-02-20 14:15:20] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/company.py
+[2026-02-20 14:15:21] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/contact.py
+[2026-02-20 14:15:21] STOPPED: status=natural_stop session=03a41fb8 mode=bypassPermissions
+[2026-02-20 14:15:21] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/log.py
+[2026-02-20 14:15:21] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/deal.py
+[2026-02-20 14:15:21] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/followup.py
+[2026-02-20 14:15:23] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/search.py
+[2026-02-20 14:15:24] Read: /home/blgroce/tools/cli-tools/crm/src/crm/commands/status.py
+[2026-02-20 14:15:24] Bash: git status 2>&1
+[2026-02-20 14:15:24] Read: /home/blgroce/tools/cli-tools/crm/src/crm/__init__.py
+[2026-02-20 14:15:24] Read: /home/blgroce/tools/cli-tools/crm/pyproject.toml
+[2026-02-20 14:15:27] Bash: grep -n "search\|status" /home/blgroce/tools/cli-tools/crm/src/crm/main.py
+[2026-02-20 14:15:29] Bash: grep -A 2 "from .commands" /home/blgroce/tools/cli-tools/crm/src/crm/main.py
