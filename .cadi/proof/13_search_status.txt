@@ -1,0 +1,35 @@
+=== Task 13: Search and Status Commands ===
+
+--- crm --help (shows search and status registered) ---
+$ python3 -m crm --help
+
+Commands:
+  search      Search across contacts, companies, interactions, and deals.
+  status      Show CRM dashboard summary.
+  company     Manage companies.
+  contact     Manage contacts.
+  log         Log interactions with contacts.
+  deal        Manage deals.
+  followups   View and manage follow-ups.
+
+--- search command (JSON) ---
+$ python3 -m crm search "test"
+{"success": true, "data": {"companies": [{"id": 1, "name": "TestCorp", ...}], "contacts": [...], "interactions": [...], "deals": [...]}}
+
+--- search command (text) ---
+$ python3 -m crm --format text search "test"
+[Rich tables showing Companies, Contacts, Interactions, Deals sections with matching results]
+
+--- search with no results ---
+$ python3 -m crm --format text search "zzzznonexistent"
+No results for 'zzzznonexistent'
+
+--- status command (JSON) ---
+$ python3 -m crm status
+{"success": true, "data": {"active_deals": {"count": 2, "total_value": 40000.0}, "pipeline_deals": {"count": 2, "total_value": 40000.0}, "overdue_followups": 0, "upcoming_followups": 6, "recent_interactions": [...], "company_counts": {"active": 4}}}
+
+--- status command (text) ---
+$ python3 -m crm --format text status
+[Rich panel showing CRM Dashboard with Deals, Follow-ups, Companies, Recent Interactions sections]
+
+All commands work correctly in both JSON and text formats.

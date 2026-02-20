@@ -73,12 +73,17 @@ from .commands.contact import app as contact_app
 from .commands.log import app as log_app
 from .commands.deal import app as deal_app
 from .commands.followup import app as followup_app
+from .commands.search import search
+from .commands.status import status
 
 app.add_typer(company_app)
 app.add_typer(contact_app)
 app.add_typer(log_app)
 app.add_typer(deal_app)
 app.add_typer(followup_app)
+
+app.command()(search)
+app.command()(status)
 
 if __name__ == "__main__":
     app()
