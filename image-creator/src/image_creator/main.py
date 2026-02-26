@@ -21,6 +21,7 @@ from . import __version__
 APP_NAME = "image-creator"
 DEFAULT_MODEL = "google/gemini-3-pro-image-preview"
 ENV_API_KEY = "IMAGE_CREATOR_API_KEY"
+ENV_API_KEY_FALLBACK = "OPENROUTER_API_KEY"
 KEYRING_SERVICE = "image-creator"
 KEYRING_ACCOUNT = "openrouter_api_key"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
@@ -129,7 +130,7 @@ def main(
 
 
 def resolve_api_key(settings: OutputSettings) -> str:
-    env_key = os.getenv(ENV_API_KEY)
+    env_key = os.getenv(ENV_API_KEY) or os.getenv(ENV_API_KEY_FALLBACK)
     if env_key:
         return env_key
     try:
@@ -143,7 +144,7 @@ def resolve_api_key(settings: OutputSettings) -> str:
         )
     if not stored:
         emit_error(
-            f"OpenRouter API key not found. Set {ENV_API_KEY} or run '{APP_NAME} auth set --key ...'.",
+            f"OpenRouter API key not found. Set {ENV_API_KEY} or {ENV_API_KEY_FALLBACK} or run '{APP_NAME} auth set --key ...'.",
             settings,
             code="INVALID_ARGS",
             exit_code=ExitCode.INVALID_ARGS,
