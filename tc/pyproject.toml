@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tc"
+version = "0.1.0"
+description = "Transaction Coordinator CLI — manage real estate transactions, tasks, people, and deadlines"
+requires-python = ">=3.10"
+dependencies = [
+    "typer",
+    "rich",
+]
+
+[project.scripts]
+tc = "tc.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
