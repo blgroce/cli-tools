@@ -1,2 +1,0 @@
-[console_scripts]
-describe-image = describe_image.main:app

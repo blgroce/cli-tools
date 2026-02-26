@@ -6,3 +6,5 @@ dist/
 build/
 .venv/
 .cadi/
+.claude/
+CLAUDE.md

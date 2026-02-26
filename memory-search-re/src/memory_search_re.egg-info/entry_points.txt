@@ -1,2 +1,0 @@
-[console_scripts]
-memory-search-re = memory_search_re.main:app

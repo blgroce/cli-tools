@@ -1,2 +1,0 @@
-[console_scripts]
-image-creator = image_creator.main:app

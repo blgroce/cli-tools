@@ -1,2 +1,0 @@
-[console_scripts]
-ports = ports.main:app
