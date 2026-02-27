@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doc-search"
+version = "0.1.0"
+description = "CLI for ingesting PDFs into SQLite FTS5 and querying them with LLM-powered Q&A"
+requires-python = ">=3.10"
+dependencies = [
+    "typer",
+    "rich",
+    "requests",
+    "boto3",
+    "amazon-textract-textractor",
+]
+
+[project.scripts]
+doc-search = "doc_search.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
