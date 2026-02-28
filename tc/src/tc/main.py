@@ -99,11 +99,14 @@ app.command("generate-tasks")(generate_tasks)
 app.command("regenerate-tasks")(regenerate_tasks)
 
 # --- Document commands ---
-from .commands.document import add_doc, docs, update_doc
+from .commands.document import add_doc, docs, update_doc, ingest_doc, link_doc, ask_doc
 
 app.command("add-doc")(add_doc)
 app.command()(docs)
 app.command("update-doc")(update_doc)
+app.command("ingest-doc")(ingest_doc)
+app.command("link-doc")(link_doc)
+app.command("ask-doc")(ask_doc)
 
 # --- Note commands ---
 from .commands.note import add_note, notes

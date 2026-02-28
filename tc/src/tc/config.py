@@ -45,5 +45,5 @@ PHASE_ORDER = {
 VALID_TIMELINE_EVENTS = {
     "created", "updated", "status_changed", "person_added", "person_updated",
     "task_completed", "task_skipped", "task_added",
-    "doc_added", "doc_updated", "note_added",
+    "doc_added", "doc_updated", "doc_ingested", "doc_linked", "note_added",
 }

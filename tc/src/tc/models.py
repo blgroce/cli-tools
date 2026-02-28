@@ -124,6 +124,7 @@ class Document:
     doc_type: str = "other"
     status: str = "needed"
     file_path: Optional[str] = None
+    doc_search_id: Optional[int] = None
     notes: Optional[str] = None
     created_at: Optional[str] = None
     updated_at: Optional[str] = None

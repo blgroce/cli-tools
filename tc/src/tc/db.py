@@ -7,7 +7,7 @@ from pathlib import Path
 DB_DIR = Path.home() / ".local" / "share" / "tc"
 DB_NAME = "tc.db"
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def get_db_path() -> Path:
@@ -106,6 +106,7 @@ def init_db(conn: sqlite3.Connection | None = None) -> sqlite3.Connection:
             doc_type        TEXT NOT NULL DEFAULT 'other',
             status          TEXT NOT NULL DEFAULT 'needed',
             file_path       TEXT,
+            doc_search_id   INTEGER,
             notes           TEXT,
             created_at      DATETIME DEFAULT (datetime('now')),
             updated_at      DATETIME DEFAULT (datetime('now'))
@@ -174,8 +175,21 @@ def init_db(conn: sqlite3.Connection | None = None) -> sqlite3.Connection:
     if row is None:
         conn.execute("INSERT INTO schema_version (version) VALUES (?)", (SCHEMA_VERSION,))
         conn.commit()
+    else:
+        current_version = row["version"]
+        if current_version < 2:
+            _migrate_v1_to_v2(conn)
 
     return conn
+
+
+def _migrate_v1_to_v2(conn: sqlite3.Connection) -> None:
+    """Add doc_search_id column to documents table."""
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(documents)").fetchall()}
+    if "doc_search_id" not in cols:
+        conn.execute("ALTER TABLE documents ADD COLUMN doc_search_id INTEGER")
+    conn.execute("UPDATE schema_version SET version = 2")
+    conn.commit()
 
 
 def log_event(conn: sqlite3.Connection, txn_id: int, event_type: str, description: str) -> None:
