@@ -23,7 +23,7 @@ def _run_doc_search(args: list[str]) -> dict:
     Raises RuntimeError with the error message on failure.
     """
     result = subprocess.run(
-        ["doc-search", *args, "--format", "json"],
+        ["doc-search", "--format", "json", *args],
         capture_output=True,
         text=True,
     )

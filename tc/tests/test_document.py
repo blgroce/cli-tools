@@ -107,7 +107,9 @@ def test_update_doc(runner, seeded_db):
 def _mock_subprocess_run(args, **kwargs):
     """Mock subprocess.run for doc-search commands."""
     mock_result = MagicMock()
-    cmd = args[1] if len(args) > 1 else ""
+    # Find the subcommand — skip "doc-search" and any global flags (--format, json, etc.)
+    subcmds = {"ingest", "show", "ask", "search", "list", "delete"}
+    cmd = next((a for a in args if a in subcmds), "")
 
     if cmd == "ingest":
         mock_result.returncode = 0
@@ -147,7 +149,7 @@ def _mock_subprocess_run(args, **kwargs):
             "data": {
                 "document_id": 99,
                 "document_name": "test-doc",
-                "question": args[2] if len(args) > 2 else "",
+                "question": args[args.index("ask") + 1] if "ask" in args else "",
                 "answer": "The option period is 10 days.",
             }
         })
@@ -310,9 +312,9 @@ class TestAskDoc:
         # Should NOT have an answer key (no LLM call)
         assert "answer" not in data["data"]
         # Should only have called doc-search show, not ask
-        called_cmds = [call[0][0][1] for call in mock_run.call_args_list]
-        assert "show" in called_cmds
-        assert "ask" not in called_cmds
+        all_args = [call[0][0] for call in mock_run.call_args_list]
+        assert any("show" in a for a in all_args)
+        assert not any("ask" in a for a in all_args)
 
     def test_deep_returns_llm_answer_and_form_fields(self, runner, seeded_db):
         """--deep mode returns LLM answer plus form fields."""
@@ -329,9 +331,9 @@ class TestAskDoc:
         assert "form_fields" in data["data"]
         assert data["data"]["form_fields"]["Contract"]["Option Period"] == "10 days"
         # Should have called both show and ask
-        called_cmds = [call[0][0][1] for call in mock_run.call_args_list]
-        assert "show" in called_cmds
-        assert "ask" in called_cmds
+        all_args = [call[0][0] for call in mock_run.call_args_list]
+        assert any("show" in a for a in all_args)
+        assert any("ask" in a for a in all_args)
 
     def test_filter_by_doc_type(self, runner, seeded_db):
         """Filter documents by type when asking."""
