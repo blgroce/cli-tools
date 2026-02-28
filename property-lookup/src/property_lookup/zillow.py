@@ -1,10 +1,34 @@
 """Zillow property data via Apify actors."""
 from __future__ import annotations
 
+import contextlib
+import logging
+import os
 import re
+import sys
 from typing import Any
 
 from apify_client import ApifyClient
+
+# Suppress noisy Apify actor run logs
+logging.getLogger("apify_client").setLevel(logging.WARNING)
+logging.getLogger("apify").setLevel(logging.WARNING)
+
+
+@contextlib.contextmanager
+def _quiet_apify():
+    """Suppress Apify stderr noise during actor calls.
+
+    The Apify client writes verbose status messages directly to stderr
+    (not through Python logging), cluttering Claude Code output.
+    """
+    old_stderr = sys.stderr
+    sys.stderr = open(os.devnull, "w")
+    try:
+        yield
+    finally:
+        sys.stderr.close()
+        sys.stderr = old_stderr
 
 from .config import (
     APIFY_API_KEY,
@@ -118,10 +142,11 @@ def lookup_by_zpid(zpid: str | int) -> dict[str, Any]:
     client = _get_client()
     url = f"https://www.zillow.com/homedetails/{zpid}_zpid/"
 
-    run = client.actor(ZILLOW_DETAIL_ACTOR).call(
-        run_input={"startUrls": [{"url": url}]},
-        timeout_secs=APIFY_TIMEOUT_SECS,
-    )
+    with _quiet_apify():
+        run = client.actor(ZILLOW_DETAIL_ACTOR).call(
+            run_input={"startUrls": [{"url": url}]},
+            timeout_secs=APIFY_TIMEOUT_SECS,
+        )
 
     items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
     if not items:
@@ -138,10 +163,11 @@ def lookup_by_url(zillow_url: str) -> dict[str, Any]:
     """Look up full property details by Zillow URL."""
     client = _get_client()
 
-    run = client.actor(ZILLOW_DETAIL_ACTOR).call(
-        run_input={"startUrls": [{"url": zillow_url}]},
-        timeout_secs=APIFY_TIMEOUT_SECS,
-    )
+    with _quiet_apify():
+        run = client.actor(ZILLOW_DETAIL_ACTOR).call(
+            run_input={"startUrls": [{"url": zillow_url}]},
+            timeout_secs=APIFY_TIMEOUT_SECS,
+        )
 
     items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
     if not items:
@@ -195,13 +221,14 @@ def search_by_address(address: str) -> dict[str, Any]:
         f"%7D%2C%22filterState%22%3A%7B%7D%7D"
     )
 
-    run = client.actor(ZILLOW_SEARCH_ACTOR).call(
-        run_input={
-            "searchUrls": [{"url": search_url}],
-            "maxItems": 50,
-        },
-        timeout_secs=APIFY_TIMEOUT_SECS,
-    )
+    with _quiet_apify():
+        run = client.actor(ZILLOW_SEARCH_ACTOR).call(
+            run_input={
+                "searchUrls": [{"url": search_url}],
+                "maxItems": 50,
+            },
+            timeout_secs=APIFY_TIMEOUT_SECS,
+        )
 
     items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
     if not items:
