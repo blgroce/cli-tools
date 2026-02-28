@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "property-lookup"
+version = "0.1.0"
+description = "Property data lookup — Zillow details via Apify + Texas MUD/water district data via TCEQ ArcGIS"
+requires-python = ">=3.10"
+dependencies = [
+    "typer",
+    "rich",
+    "requests",
+    "apify-client",
+]
+
+[project.scripts]
+property-lookup = "property_lookup.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
