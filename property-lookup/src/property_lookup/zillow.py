@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import contextlib
+import json
 import logging
 import os
 import re
 import sys
+import urllib.parse
 from typing import Any
 
 from apify_client import ApifyClient
@@ -140,7 +142,7 @@ def _normalize_zillow_data(item: dict[str, Any]) -> dict[str, Any]:
 def lookup_by_zpid(zpid: str | int) -> dict[str, Any]:
     """Look up full property details by Zillow ZPID."""
     client = _get_client()
-    url = f"https://www.zillow.com/homedetails/{zpid}_zpid/"
+    url = f"https://www.zillow.com/homedetails/p/{zpid}_zpid/"
 
     with _quiet_apify():
         run = client.actor(ZILLOW_DETAIL_ACTOR).call(
@@ -202,35 +204,38 @@ def search_by_address(address: str) -> dict[str, Any]:
         )
 
     lat, lon = coords
-    # Create tight bounding box (~0.5 mile radius)
-    delta = 0.008  # ~0.5 miles
-    bounds = {
-        "west": lon - delta,
-        "east": lon + delta,
-        "south": lat - delta,
-        "north": lat + delta,
+    # Bounding box ~1.5 miles — tight enough to limit results,
+    # wide enough to handle geocoder imprecision.
+    delta = 0.02
+    search_state = {
+        "isMapVisible": True,
+        "mapBounds": {
+            "west": lon - delta,
+            "east": lon + delta,
+            "south": lat - delta,
+            "north": lat + delta,
+        },
+        "filterState": {
+            "ah": {"value": True},  # all homes, including off-market
+            "sort": {"value": "days"},
+        },
+        "isListVisible": True,
     }
-
-    search_url = (
-        f"https://www.zillow.com/homes/{lat},{lon}_rb/"
-        f"?searchQueryState=%7B%22mapBounds%22%3A%7B"
-        f"%22west%22%3A{bounds['west']}%2C"
-        f"%22east%22%3A{bounds['east']}%2C"
-        f"%22south%22%3A{bounds['south']}%2C"
-        f"%22north%22%3A{bounds['north']}"
-        f"%7D%2C%22filterState%22%3A%7B%7D%7D"
-    )
+    encoded = urllib.parse.quote(json.dumps(search_state, separators=(",", ":")))
+    search_url = f"https://www.zillow.com/homes/for_sale/?searchQueryState={encoded}"
 
     with _quiet_apify():
         run = client.actor(ZILLOW_SEARCH_ACTOR).call(
             run_input={
                 "searchUrls": [{"url": search_url}],
-                "maxItems": 50,
+                "maxItems": 80,
             },
             timeout_secs=APIFY_TIMEOUT_SECS,
         )
 
-    items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
+    raw_items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
+    # Filter out error/empty items (the actor sometimes returns placeholder dicts)
+    items = [i for i in raw_items if i.get("zpid") or i.get("detailUrl")]
     if not items:
         raise ZillowError(f"No Zillow listings found near: {address}")
 
@@ -253,9 +258,17 @@ def search_by_address(address: str) -> dict[str, Any]:
         # Return the closest one with a warning
         best_match = items[0]
 
+    # Use the full detail URL from search results (the Apify detail actor
+    # requires the address slug in the URL path, not just the ZPID).
+    detail_url = best_match.get("detailUrl") or best_match.get("hdpUrl")
+    if detail_url:
+        if not detail_url.startswith("http"):
+            detail_url = f"https://www.zillow.com{detail_url}"
+        return lookup_by_url(detail_url)
+
+    # Fallback: if no URL but we have a ZPID, try with placeholder slug
     zpid = best_match.get("zpid")
     if not zpid:
-        raise ZillowError("Found listings but no ZPID available")
+        raise ZillowError("Found listings but no ZPID or detail URL available")
 
-    # Now get full details
     return lookup_by_zpid(str(zpid))

@@ -23,9 +23,12 @@ FBCAD_MUD_URL = (
     "/General/Water_Districts/MapServer/4/query"
 )
 
-# --- Nominatim Geocoding ---
+# --- Geocoding ---
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
 NOMINATIM_USER_AGENT = "property-lookup/0.1 (BCG Ventures)"
+CENSUS_GEOCODER_URL = (
+    "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
+)
 
 # --- TCEQ District Types We Care About ---
 DISTRICT_TYPES_OF_INTEREST = {
