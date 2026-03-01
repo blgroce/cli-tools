@@ -54,7 +54,7 @@ def create(
     county: str = typer.Option(None),
     zip_code: str = typer.Option(None, "--zip"),
     notes: str = typer.Option(None),
-    generate: bool = typer.Option(True, "--generate-tasks/--no-tasks", help="Auto-generate tasks from templates"),
+    generate: bool = typer.Option(False, "--generate-tasks/--no-tasks", help="Auto-generate tasks from templates"),
 ) -> None:
     """Create a new real estate transaction."""
     settings = get_settings(ctx)
