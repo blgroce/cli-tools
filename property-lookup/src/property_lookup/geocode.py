@@ -3,11 +3,34 @@ from __future__ import annotations
 
 import requests
 
-from .config import CENSUS_GEOCODER_URL, NOMINATIM_URL, NOMINATIM_USER_AGENT
+from .config import (
+    CENSUS_GEOCODER_URL,
+    GOOGLE_GEOCODING_KEY,
+    GOOGLE_GEOCODING_URL,
+    NOMINATIM_URL,
+    NOMINATIM_USER_AGENT,
+)
+
+
+def _geocode_google(address: str) -> tuple[float, float] | None:
+    """Try Google Geocoding API first (best fuzzy matching)."""
+    if not GOOGLE_GEOCODING_KEY:
+        return None
+    resp = requests.get(
+        GOOGLE_GEOCODING_URL,
+        params={"address": address, "key": GOOGLE_GEOCODING_KEY},
+        timeout=10,
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    if data.get("status") != "OK" or not data.get("results"):
+        return None
+    loc = data["results"][0]["geometry"]["location"]
+    return float(loc["lat"]), float(loc["lng"])
 
 
 def _geocode_nominatim(address: str) -> tuple[float, float] | None:
-    """Try Nominatim (OpenStreetMap) first."""
+    """Try Nominatim (OpenStreetMap)."""
     resp = requests.get(
         NOMINATIM_URL,
         params={"q": address, "format": "json", "limit": 1, "countrycodes": "us"},
@@ -43,10 +66,14 @@ def _geocode_census(address: str) -> tuple[float, float] | None:
 def geocode_address(address: str) -> tuple[float, float] | None:
     """Geocode an address to (latitude, longitude).
 
-    Tries Nominatim first, falls back to US Census geocoder.
-    Returns None if both fail.
+    Tries Google first, falls back to Nominatim, then US Census.
+    Returns None if all fail.
     """
-    result = _geocode_nominatim(address)
-    if result:
-        return result
-    return _geocode_census(address)
+    for geocoder in (_geocode_google, _geocode_nominatim, _geocode_census):
+        try:
+            result = geocoder(address)
+            if result:
+                return result
+        except Exception:
+            continue
+    return None

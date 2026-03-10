@@ -4,6 +4,7 @@ import os
 
 # --- API Keys ---
 APIFY_API_KEY = os.environ.get("APIFY_API_KEY", "")
+GOOGLE_GEOCODING_KEY = os.environ.get("GOOGLE_GEOCODING_KEY", "")
 
 # --- Apify Actors ---
 ZILLOW_DETAIL_ACTOR = "maxcopell/zillow-detail-scraper"
@@ -24,6 +25,7 @@ FBCAD_MUD_URL = (
 )
 
 # --- Geocoding ---
+GOOGLE_GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
 NOMINATIM_USER_AGENT = "property-lookup/0.1 (BCG Ventures)"
 CENSUS_GEOCODER_URL = (
